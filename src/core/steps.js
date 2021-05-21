@@ -35,7 +35,7 @@ export function goToStepNumber(step) {
  * @api private
  * @method _nextStep
  */
-export function nextStep() {
+export async function nextStep() {
   this._direction = "forward";
 
   if (typeof this._currentStepNumber !== "undefined") {
@@ -52,8 +52,17 @@ export function nextStep() {
   } else {
     ++this._currentStep;
   }
-
+  
   const nextStep = this._introItems[this._currentStep];
+  
+  if (typeof nextStep.beforeEnter === "function") {
+    await nextStep.beforeEnter()
+  }
+  
+  if (typeof nextStep.element === "function") {
+    nextStep.element = await nextStep.element()
+  }
+  
   let continueStep = true;
 
   if (typeof this._introBeforeChangeCallback !== "undefined") {
