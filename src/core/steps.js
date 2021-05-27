@@ -116,6 +116,10 @@ export function previousStep() {
     );
   }
 
+  if (typeof nextStep.beforeEnter === "function") {
+    await nextStep.beforeEnter();
+  }
+
   // if `onbeforechange` returned `false`, stop displaying the element
   if (continueStep === false) {
     ++this._currentStep;
