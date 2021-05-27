@@ -97,7 +97,7 @@ export async function nextStep() {
  * @api private
  * @method _previousStep
  */
-export function previousStep() {
+export async function previousStep() {
   this._direction = "backward";
 
   if (this._currentStep === 0) {
