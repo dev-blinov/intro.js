@@ -97,7 +97,7 @@ export async function nextStep() {
  * @api private
  * @method _previousStep
  */
-export function previousStep() {
+export async function previousStep() {
   this._direction = "backward";
 
   if (this._currentStep === 0) {
@@ -114,6 +114,10 @@ export function previousStep() {
       this,
       nextStep && nextStep.element
     );
+  }
+
+  if (typeof nextStep.beforeEnter === "function") {
+    await nextStep.beforeEnter();
   }
 
   // if `onbeforechange` returned `false`, stop displaying the element
