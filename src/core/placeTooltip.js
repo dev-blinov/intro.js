@@ -222,6 +222,7 @@ export default function placeTooltip(
   }
 
   let tooltipLayerStyleLeft;
+  let tooltipLayerStyleRight;
   targetOffset = getOffset(targetElement);
   tooltipOffset = getOffset(tooltipLayer);
   windowSize = getWindowSize();
@@ -232,7 +233,7 @@ export default function placeTooltip(
     case "top-right-aligned":
       arrowLayer.className = "introjs-arrow bottom-right";
 
-      let tooltipLayerStyleRight = 0;
+      tooltipLayerStyleRight = 0;
       checkLeft(
         targetOffset,
         tooltipLayerStyleRight,
